@@ -1,0 +1,13 @@
+set -e -x
+
+ruby_version=ruby-2.6.8-r0.58.0
+
+source /var/vcap/packages/${ruby_version}/bosh/compile.env
+
+mkdir -p ${BOSH_INSTALL_TARGET}
+rm -rf ${BOSH_INSTALL_TARGET}/*
+cp -Ra sinatra_app/* ${BOSH_INSTALL_TARGET}
+cd ${BOSH_INSTALL_TARGET}
+
+bosh_bundle_local
+bosh_generate_runtime_env
