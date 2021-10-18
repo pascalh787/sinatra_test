@@ -1,0 +1,9 @@
+---
+name: sinatra_app
+
+templates:
+  bin/ctl.erb: bin/ctl
+
+packages: []
+
+properties: {}
