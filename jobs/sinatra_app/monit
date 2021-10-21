@@ -1,0 +1,5 @@
+check process sinatra_app
+  with pidfile /var/vcap/sys/run/sinatra_app/pid
+  start program "/var/vcap/jobs/sinatra_app/bin/ctl start"
+  stop program "/var/vcap/jobs/sinatra_app/bin/ctl stop"
+  group vcap

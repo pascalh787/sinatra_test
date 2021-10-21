@@ -1,0 +1,37 @@
+#!/bin/bash
+
+RUN_DIR=/var/vcap/sys/run/sinatra_app
+LOG_DIR=/var/vcap/sys/log/sinatra_app
+PIDFILE=${RUN_DIR}/pid
+
+source /var/vcap/packages/ruby-2.6.8-r0.58.0/bosh/runtime.env
+source /var/vcap/packages/sinatra_app/bosh/runtime.env
+
+case $1 in
+
+  start)
+    mkdir -p $RUN_DIR $LOG_DIR
+    chown -R vcap:vcap $RUN_DIR $LOG_DIR
+
+    echo $$ > $PIDFILE
+
+    cd /var/vcap/packages/sinatra_app
+
+    export PATH=/var/vcap/packages/ruby-2.6.8-r0.58.0/bin:$PATH
+
+    exec bundle exec puma \
+      >>  $LOG_DIR/sinatra_app.stdout.log \
+      2>> $LOG_DIR/sinatra_app.stderr.log
+
+    ;;
+
+  stop)
+    kill -9 `cat $PIDFILE`
+    rm -f $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: ctl {start|stop}" ;;
+
+esac

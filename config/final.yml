@@ -1,0 +1,5 @@
+name: sinatra_app
+blobstore:
+  provider: local
+  options:
+    blobstore_path: /tmp/test-blobs

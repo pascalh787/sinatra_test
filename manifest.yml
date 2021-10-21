@@ -1,0 +1,36 @@
+name: sinatra_app
+
+features:
+  randomize_az_placement: true
+
+update:
+  canaries: 1
+  canary_watch_time: 30000-600000
+  max_in_flight: 1
+  serial: true
+  update_watch_time: 5000-600000
+
+stemcells:
+- os: ubuntu-bionic
+  alias: ubuntu-bionic
+  version: 1.25
+
+releases:
+- name: sinatra_app
+  version: 0+dev.1634804275
+- name: a9s-consul
+  version: latest
+
+instance_groups:
+- name: sinatra_app
+  vm_type: small
+  instances: 1
+  azs: [z1, z2, z3]
+  stemcell: ubuntu-bionic
+  jobs:
+  - name: sinatra_app
+    release: sinatra_app
+    # properties:
+
+  networks:
+  - name: dynamic

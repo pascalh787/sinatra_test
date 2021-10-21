@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 require 'sinatra'
+
+set :port, ENV['PUMA_PORT'] || 9292
 
 # API calls
 
@@ -26,7 +30,7 @@ end
 
 # get the whole data
 def data
-  file = File.open('data/db')
+  file = File.open('db')
   data = file.readlines.map(&:chomp)
   file.close
   data
@@ -43,7 +47,7 @@ end
 
 # put data into the db file
 def post_data(data)
-  file = File.open('data/db', 'a')
+  file = File.open('db', 'a')
   file.puts(data)
   file.close
 end
