@@ -4,6 +4,9 @@ RUN_DIR=/var/vcap/sys/run/sinatra_app
 LOG_DIR=/var/vcap/sys/log/sinatra_app
 PIDFILE=${RUN_DIR}/pid
 
+source /var/vcap/packages/ruby-2.6.8-r0.58.0/bosh/runtime.env
+source /var/vcap/packages/sinatra_app/bosh/runtime.env
+
 case $1 in
 
   start)
@@ -14,9 +17,9 @@ case $1 in
 
     cd /var/vcap/packages/sinatra_app
 
-    export PATH=/var/vcap/packages/ruby_2.7.2/bin:$PATH
+    export PATH=/var/vcap/packages/ruby-2.6.8-r0.58.0/bin:$PATH
 
-    exec /var/vcap/packages/ruby_2.7.2/bin/bundle exec puma \
+    exec bundle exec puma \
       >>  $LOG_DIR/sinatra_app.stdout.log \
       2>> $LOG_DIR/sinatra_app.stderr.log
 
