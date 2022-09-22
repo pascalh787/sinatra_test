@@ -4,7 +4,7 @@ GEM
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.5.8)
-    puma (5.5.0)
+    puma (4.3.12)
       nio4r (~> 2.0)
     rack (2.2.3)
     rack-protection (2.1.0)
@@ -18,11 +18,12 @@ GEM
     tilt (2.0.10)
 
 PLATFORMS
+  arm64-darwin-21
   universal-darwin-20
 
 DEPENDENCIES
-  puma (~> 5.5)
+  puma (~> 4.3.8)
   sinatra (~> 2.1)
 
 BUNDLED WITH
-   2.2.28
+   2.3.16
